@@ -15,8 +15,10 @@ const GALLERY_ITEMS = [
   { type: "img", src: "images/Image0244.jpg", label: "Our first photo" },
   { type: "img", src: "images/sunset.png",     label: "That sunset" },
   { type: "img", src: "images/coffee.png",     label: "Coffee mornings" },
+  { type: "video", src: "videos/video1.mp4",   label: "A beautiful moment" },
+  { type: "video", src: "videos/video2.mp4",   label: "Our first trip" },
   { type: "img", src: "images/music.png",      label: "Our song night" },
-  { type: "img", src: "images/moment.png",     label: "A moment I recorded" },
+  { type: "img", src: "images/moment.png",     label: "A candid snap" },
   { type: "img", src: "images/night.png",      label: "Late-night talks" },
 ];
 
@@ -133,12 +135,18 @@ function buildGallery() {
           <video src="${item.src}" muted loop playsinline></video>
           <div class="play-overlay">▶</div>
         `;
-        el.addEventListener('mouseenter', () => el.querySelector('video').play());
-        el.addEventListener('mouseleave', () => {
-          const v = el.querySelector('video');
-          v.pause();
-          v.currentTime = 0;
-        });
+      el.addEventListener('mouseenter', () => {
+        el.querySelector('video').play();
+        const overlay = el.querySelector('.play-overlay');
+        if (overlay) overlay.style.opacity = '0';
+      });
+      el.addEventListener('mouseleave', () => {
+        const v = el.querySelector('video');
+        v.pause();
+        v.currentTime = 0;
+        const overlay = el.querySelector('.play-overlay');
+        if (overlay) overlay.style.opacity = '';
+      });
       } else {
         el.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
       }
