@@ -129,33 +129,49 @@ function buildGallery() {
     el.style.animationDelay = `${idx * 0.1}s`;
 
     if (item.src) {
-      // Use real image if src is provided
       if (item.type === "video") {
         el.innerHTML = `
           <video src="${item.src}" muted loop playsinline></video>
+          <div class="gallery-info">
+            <span class="gallery-label">${item.label}</span>
+            <span class="gallery-type">Video</span>
+          </div>
           <div class="play-overlay">▶</div>
         `;
+        // ... (listeners updated below)
+      } else {
+        el.innerHTML = `
+          <img src="${item.src}" alt="${item.label}" loading="lazy">
+          <div class="gallery-info">
+            <span class="gallery-label">${item.label}</span>
+          </div>
+        `;
+      }
+    } else {
+      el.innerHTML = `
+        <div class="gallery-placeholder">${item.emoji || "❤️"}</div>
+        <div class="gallery-info">
+          <span class="gallery-label">${item.label}</span>
+        </div>
+      `;
+    }
+
+    // Video Hover Logic
+    if (item.type === "video") {
       el.addEventListener('mouseenter', () => {
-        el.querySelector('video').play();
+        const v = el.querySelector('video');
+        if (v) v.play();
         const overlay = el.querySelector('.play-overlay');
         if (overlay) overlay.style.opacity = '0';
       });
       el.addEventListener('mouseleave', () => {
         const v = el.querySelector('video');
-        v.pause();
-        v.currentTime = 0;
+        if (v) { v.pause(); v.currentTime = 0; }
         const overlay = el.querySelector('.play-overlay');
         if (overlay) overlay.style.opacity = '';
       });
-      } else {
-        el.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
-      }
-    } else {
-      // Fallback to emoji placeholder
-      el.innerHTML = `<div class="gallery-placeholder">${item.emoji || "❤️"}</div>`;
     }
 
-    el.title = item.label;
     grid.appendChild(el);
   });
 }
