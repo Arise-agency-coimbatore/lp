@@ -13,13 +13,13 @@ const LOVE_START_DATE = new Date("2025-01-10T00:00:00"); // 📅 Change this
 // ─── GALLERY ITEMS ────────────────────────
 const GALLERY_ITEMS = [
   { type: "img", src: "images/Image0244.jpg", label: "Our first photo" },
-  { type: "img", src: "images/sunset.png",     label: "That sunset" },
-  { type: "img", src: "images/coffee.png",     label: "Coffee mornings" },
-  { type: "video", src: "videos/video1.mp4",   label: "A beautiful moment" },
-  { type: "video", src: "videos/video2.mp4",   label: "Our first trip" },
-  { type: "img", src: "images/music.png",      label: "Our song night" },
-  { type: "img", src: "images/moment.png",     label: "A candid snap" },
-  { type: "img", src: "images/night.png",      label: "Late-night talks" },
+  { type: "img", src: "images/sunset.png",     label: "our happy moments" },
+  { type: "img", src: "images/coffee.png",     label: "my birthday gift" },
+  { type: "video", src: "videos/video1.mp4",   label: "my first birthday wish for you" },
+  { type: "video", src: "videos/video2.mp4",   label: "my second birthday wish for you" },
+  { type: "img", src: "images/music.png",      label: "Our bus travel" },
+  { type: "img", src: "images/moment.png",     label: "A candid love" },
+  { type: "img", src: "images/night.png",      label: "our first trip as lovers" },
 ];
 
 // ─── CHAT MESSAGES ────────────────────────
@@ -79,7 +79,7 @@ function revealMainSite() {
 function initTyping() {
   const target = document.getElementById("typing-text");
   const subtitle = document.querySelector(".hero-subtitle");
-  const text = "I love you…";
+  const text = "I'm Always yours…";
   let i = 0;
 
   function typeChar() {
