@@ -10,14 +10,14 @@
 // ─── CONFIG ───────────────────────────────
 const LOVE_START_DATE = new Date("2025-01-10T00:00:00"); // 📅 Change this
 
-// ─── GALLERY ITEMS (add real paths later) ─
+// ─── GALLERY ITEMS ────────────────────────
 const GALLERY_ITEMS = [
-  { type: "img", emoji: "🌸", label: "Our first photo" },
-  { type: "img", emoji: "🌅", label: "That sunset" },
-  { type: "img", emoji: "☕", label: "Coffee mornings" },
-  { type: "img", emoji: "🎵", label: "Our song night" },
-  { type: "video", emoji: "🎬", label: "A moment I recorded" },
-  { type: "img", emoji: "🌙", label: "Late-night talks" },
+  { type: "img", src: "images/Image0244.jpg", label: "Our first photo" },
+  { type: "img", src: "images/sunset.png",     label: "That sunset" },
+  { type: "img", src: "images/coffee.png",     label: "Coffee mornings" },
+  { type: "img", src: "images/music.png",      label: "Our song night" },
+  { type: "img", src: "images/moment.png",     label: "A moment I recorded" },
+  { type: "img", src: "images/night.png",      label: "Late-night talks" },
 ];
 
 // ─── CHAT MESSAGES ────────────────────────
@@ -126,13 +126,25 @@ function buildGallery() {
     el.className = "gallery-item";
     el.style.animationDelay = `${idx * 0.1}s`;
 
-    if (item.type === "video") {
-      el.innerHTML = `
-        <div class="gallery-placeholder">${item.emoji}</div>
-        <div class="play-overlay">▶</div>
-      `;
+    if (item.src) {
+      // Use real image if src is provided
+      if (item.type === "video") {
+        el.innerHTML = `
+          <video src="${item.src}" muted loop playsinline></video>
+          <div class="play-overlay">▶</div>
+        `;
+        el.addEventListener('mouseenter', () => el.querySelector('video').play());
+        el.addEventListener('mouseleave', () => {
+          const v = el.querySelector('video');
+          v.pause();
+          v.currentTime = 0;
+        });
+      } else {
+        el.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy">`;
+      }
     } else {
-      el.innerHTML = `<div class="gallery-placeholder">${item.emoji}</div>`;
+      // Fallback to emoji placeholder
+      el.innerHTML = `<div class="gallery-placeholder">${item.emoji || "❤️"}</div>`;
     }
 
     el.title = item.label;
