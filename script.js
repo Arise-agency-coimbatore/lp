@@ -79,7 +79,7 @@ function revealMainSite() {
 function initTyping() {
   const target = document.getElementById("typing-text");
   const subtitle = document.querySelector(".hero-subtitle");
-  const text = "I'm Always yours…";
+  const text = "I'm Always yours…❤️";
   let i = 0;
 
   function typeChar() {
@@ -213,7 +213,7 @@ function buildChat() {
 // ══════════════════════════════════════════
 function spawnHearts() {
   const container = document.getElementById("floating-hearts");
-  const emojis = ["❤️", "🤍", "💕", "✨", "🌸", "💫"];
+  const emojis = ["❤️", "🤍", "💕"];
 
   function createHeart() {
     const el = document.createElement("span");
